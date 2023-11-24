@@ -28,14 +28,23 @@ body {
     align-items: center;
 }
 
+h1, form, .advice, .output {
+    width: 100%;
+}
+
 h1 {
     font-family: "Nunito Sans", sans-serif;
     font-size: 3em;
     font-weight: 700;
+    text-align: center;
 }
 
 form {
     margin: 2em 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 input[type=text] {
@@ -44,6 +53,12 @@ input[type=text] {
     width: 30em;
     margin-right: 2em;
     font-size: 15px;
+    border-radius: 6px;
+    border: 2px solid transparent;
+}
+
+input[type=text]:focus {
+    border: 2px solid #000;
 }
 
 .add-button {
@@ -54,4 +69,40 @@ input[type=text] {
     font-family: "Nunito Sans", sans-serif;
     font-size: 15px;
     font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
 }
+
+.advice {
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 1.3em;
+    font-weight: 700;
+    text-align: center;
+    color: #ff0000;
+    margin: 1em 0 2em;
+}
+
+.output {
+    min-height: 20em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.field {
+    height: 6em;
+    flex-basis: 30%;
+    background-color: #fff;
+    border-radius: 6px;
+    border: 1.5px solid transparent;
+    transition: 0.4s;
+    cursor: pointer;
+    font-family: "Nunito Sans", sans-serif;
+    padding: 12px;
+}
+
+.field:hover {
+    border: 1.5px solid #000;
+}
+
