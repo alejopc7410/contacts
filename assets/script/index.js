@@ -28,15 +28,13 @@ function validation() {
     let inputValue = input.value.split(', ');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!emailRegex.test(inputValue)) {
+    if (!emailRegex.test(inputValue[2])) {
         advice.textContent = 'Please enter a valid email or put it in the correct order'
         return false;
     } else {
         advice.textContent = 'Contact Created'
         return true;
-    }
-
-    
+    } 
 }
 
 function listContacts() {
