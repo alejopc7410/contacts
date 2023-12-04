@@ -1,6 +1,6 @@
 'use strict';
 
-import { Contact } from "./class.js";
+import { Contact } from "./Contact.js";
 
 /*------------- Utility Functions ----------*/
 function select (selector) {
@@ -24,11 +24,11 @@ const yesBtn = select('.yes-button')
 const noBtn = select('.no-button')
 const confirmationModal = select ('.confirmation-modal')
 
-function validation() {
-    let inputValue = input.value.split(', ');
+function validation(input) {
+    
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!emailRegex.test(inputValue[2])) {
+    
+    if (!emailRegex.test(input[2]) || input === '') {
         advice.textContent = 'Please enter a valid email or put it in the correct order'
         return false;
     } else {
@@ -38,27 +38,33 @@ function validation() {
 }
 
 function listContacts() {
-    let inputValues = input.value.split(', ');
-    let upperCase = inputValues[1].charAt(0).toUpperCase() + inputValues[1].slice(1);
-
-    if (!validation(inputValues)) {
+    let inputValue = input.value.split(', ');
+    if (!validation(inputValue)) {
         return false;
     }
+    let upperCase = inputValue[1].charAt(0).toUpperCase() + inputValue[1].slice(1);
 
-    const contact = new Contact(inputValues[0], inputValues[1], inputValues[2])
+    const contact = new Contact(inputValue[0], inputValue[1], inputValue[2])
     const contactDiv = document.createElement('div')
     contactDiv.className = 'field'
     divContacts.appendChild(contactDiv)
     contactDiv.innerHTML = `<b>Name:</b> ${contact.name}<br><b>City:</b> ${upperCase}<br><b>Email:</b> ${contact.email}`;
+    input.value = ''
 
     onEvent(contactDiv, 'click', () => {
         confirmationModal.style.display = 'grid';
         onEvent(yesBtn, 'click', () => {
-            divContacts.removeChild(contactDiv)
+            if (divContacts.contains(contactDiv)) {
+                divContacts.removeChild(contactDiv)
+            }
             confirmationModal.style.display = 'none'
-        })
+            advice.textContent = 'Contact Deleted'
+            setTimeout(() => {advice.textContent = ''}, 5000)
+        });
         onEvent(noBtn, 'click', () => {confirmationModal.style.display = 'none';})
     })
+
+    setTimeout(() => {advice.textContent = ''}, 5000)
 }
 
 onEvent(addBtn, 'click', listContacts)

@@ -20,7 +20,4 @@ class Contact {
     };
 }
 
-const con1 = new Contact('Mark', 'Calgary', 'mark@email.com')
-console.log(`${con1.name}`)
-
 export {Contact};
